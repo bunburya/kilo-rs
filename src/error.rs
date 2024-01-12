@@ -6,7 +6,8 @@ use std::string::FromUtf8Error;
 pub enum Error {
     IoError(io::Error),
     EscSeqParseError(String),
-    Utf8ParseError(Vec<u8>)
+    Utf8ParseError(Vec<u8>),
+    BadKeyError(u8)
 }
 
 impl Display for Error {
@@ -15,7 +16,8 @@ impl Display for Error {
         match self {
             IoError(err) => write!(f, "Input/output error: {err}"),
             EscSeqParseError(seq) => write!(f, "Error parsing escape sequence: {seq}"),
-            Utf8ParseError(bytes) => write!(f, "Byte sequence is not UTF-8: {bytes:?}")
+            Utf8ParseError(bytes) => write!(f, "Byte sequence is not UTF-8: {bytes:?}"),
+            BadKeyError(key) => write!(f, "Unexpected or invalid key: {key}")
         }
     }
 }

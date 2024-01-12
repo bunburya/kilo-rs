@@ -8,10 +8,10 @@ use crate::editor::Editor;
 use crate::terminal::die;
 
 
-fn run(editor: Editor) {
+fn run(mut editor: Editor) {
     loop {
         editor.refresh_screen();
-        editor.process_keypress();
+        editor.handle_keypress();
     }
 
 }
